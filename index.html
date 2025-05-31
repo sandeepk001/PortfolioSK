@@ -5,14 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandeep Kumar - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    // You can extend your theme here if needed
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            /* Default light mode background and text colors */
             background-color: #f8fafc; /* Light Slate 50 */
             color: #334155; /* Slate 700 */
         }
+        /* Dark mode styles applied when 'dark' class is on html element */
+        html.dark body {
+            background-color: #1a202c; /* Darker background for dark mode */
+            color: #e2e8f0; /* Lighter text for dark mode */
+        }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -21,267 +38,285 @@
             background: #e2e8f0; /* Slate 200 */
             border-radius: 10px;
         }
+        html.dark ::-webkit-scrollbar-track {
+            background: #475569; /* Darker slate for dark mode scrollbar track */
+        }
         ::-webkit-scrollbar-thumb {
             background: #64748b; /* Slate 500 */
             border-radius: 10px;
         }
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* Lighter slate for dark mode scrollbar thumb */
+        }
         ::-webkit-scrollbar-thumb:hover {
             background: #475569; /* Slate 600 */
+        }
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1; /* Even lighter slate for dark mode scrollbar thumb hover */
+        }
+
+        .gradient-button {
+            background: linear-gradient(90deg, rgba(82,201,36,1) 0%, rgba(55,145,26,1) 100%);
+        }
+        .gradient-button:hover {
+            background: linear-gradient(90deg, rgba(62,181,16,1) 0%, rgba(35,125,6,1) 100%);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <header class="bg-white shadow-lg fixed w-full z-50 top-0">
+    <header class="bg-white dark:bg-gray-950 shadow-lg fixed w-full z-50 top-0">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-300">Sandeep Kumar</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300">Home</a>
-                <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300">About</a>
-                <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300">Skills</a>
-                <a href="#certifications" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300">Certifications</a>
-                <a href="#work" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300">Work</a>
-                <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300">Contact</a>
+            <a href="#home" class="text-2xl font-bold text-indigo-600 dark:text-white hover:text-indigo-700 dark:hover:text-indigo-400 transition duration-300">Sandeep Kumar</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300">Home</a>
+                <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300">About</a>
+                <a href="#skills" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300">Skills</a>
+                <a href="#certifications" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300">Certifications</a>
+                <a href="#work" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300">Work</a>
+                <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300">Contact</a>
+                <button id="theme-toggle" class="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300 focus:outline-none">
+                    <i class="fas fa-moon text-xl" id="theme-icon"></i>
+                </button>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 dark:text-gray-300 focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6 text-xl">
-            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-700 focus:outline-none">
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-white dark:bg-gray-950 bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6 text-xl">
+            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-700 dark:text-gray-300 focus:outline-none">
                 <i class="fas fa-times text-3xl"></i>
             </button>
-            <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Home</a>
-            <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
-            <a href="#skills" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Skills</a>
-            <a href="#certifications" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Certifications</a>
-            <a href="#work" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Work</a>
-            <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+            <a href="#home" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Home</a>
+            <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
+            <a href="#skills" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Skills</a>
+            <a href="#certifications" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Certifications</a>
+            <a href="#work" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Work</a>
+            <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-white font-medium transition duration-300" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+            <button id="theme-toggle-mobile" class="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300 focus:outline-none">
+                <i class="fas fa-moon text-xl" id="theme-icon-mobile"></i>
+            </button>
         </div>
     </header>
 
-    <main class="pt-20"> <section id="home" class="relative h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600 text-white overflow-hidden">
-            <div class="absolute inset-0 z-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <circle cx="5" cy="5" r="1" fill="rgba(255,255,255,0.1)"></circle>
-                        </pattern>
-                    </defs>
-                    <rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-circles)"></rect>
-                </svg>
-            </div>
-            <div class="container mx-auto px-4 text-center z-10">
-                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg animate-fade-in-down">
-                    Hi, I'm Sandeep Kumar
-                </h1>
-                <p class="text-2xl md:text-3xl font-light mb-8 animate-fade-in-up">
-                    Java Full Stack Developer & Cloud Administrator
-                </p>
-                <a href="SandeepKumarSe.pdf" target="_blank" class="inline-block bg-white text-indigo-600 hover:bg-indigo-100 px-8 py-3 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 animate-bounce-in">
-                    <i class="fas fa-file-alt mr-2"></i> View Resume
-                </a>
+    <main class="pt-20"> <section id="home" class="relative h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white flex items-center overflow-hidden">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between z-10 py-16 md:py-0">
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+                        Sandeep Kumar
+                    </h1>
+                    <p class="text-lg md:text-xl font-light mb-8 text-gray-700 dark:text-gray-300">
+                        I am a Java Full Stack Developer & Cloud Administrator adept at building and optimizing Java Spring Boot applications for high-traffic environments.
+                    </p>
+                    <a href="assets/Resume_SK.pdf" target="_blank" class="inline-block gradient-button text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105">
+                        <i class="fas fa-download mr-2"></i> Download Resume
+                    </a>
+                </div>
+
+                <div class="md:w-1/2 flex justify-center md:justify-end">
+                    <img src="assets/sandeep photo.png" alt="Sandeep Kumar Profile" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-indigo-200 dark:border-gray-600">
+                </div>
             </div>
         </section>
 
-        <section id="about" class="py-16 md:py-24 bg-white">
+        <section id="about" class="py-16 md:py-24 bg-white dark:bg-gray-800">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 relative pb-4">
+                <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-12 relative pb-4">
                     About Me
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 rounded-full"></span>
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full"></span>
                 </h2>
                 <div class="flex flex-col md:flex-row items-center md:space-x-12">
                     <div class="md:w-1/3 mb-8 md:mb-0">
-                        <img src="sandeep.jpg" alt="Sandeep Kumar" class="rounded-full shadow-2xl border-4 border-indigo-200 w-64 h-64 md:w-150 md:h-80 object-cover mx-auto transform hover:scale-105 transition duration-300">
+                        <img src="assets/sandeep photo.png" alt="Sandeep Kumar" class="rounded-full shadow-2xl border-4 border-indigo-200 dark:border-indigo-600 w-64 h-64 md:w-80 md:h-80 object-cover mx-auto transform hover:scale-105 transition duration-300">
                     </div>
-                    <div class="md:w-2/3 text-lg leading-relaxed text-gray-700">
+                    <div class="md:w-2/3 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
                         <p class="mb-4">
-                            I am a passionate <strong class="text-indigo-600">Java Full Stack Developer & Cloud Administrator</strong>, highly skilled in building and optimizing robust Java Spring Boot applications for high-traffic environments. My expertise lies in leveraging modern technologies to deliver secure, scalable, and high-performing microservices.
+                            I am a passionate <strong class="text-indigo-600 dark:text-indigo-400">Java Full Stack Developer & Cloud Administrator</strong>, highly skilled in building and optimizing robust Java Spring Boot applications for high-traffic environments. My expertise lies in leveraging modern technologies to deliver secure, scalable, and high-performing microservices.
                         </p>
                         <p class="mb-4">
-                            I have a strong command of <strong class="text-indigo-600">Redis caching, JWT-based security, and OAuth 2.0</strong>, ensuring robust authentication and authorization. I am proficient with cloud platforms like <strong class="text-indigo-600">Microsoft Azure (App Service, AKS)</strong> and experienced in setting up efficient <strong class="text-indigo-600">CI/CD pipelines (Maven, Jenkins)</strong>.
+                            I have a strong command of <strong class="text-indigo-600 dark:text-indigo-400">Redis caching, JWT-based security, and OAuth 2.0</strong>, ensuring robust authentication and authorization. I am proficient with cloud platforms like <strong class="text-indigo-600 dark:text-indigo-400">Microsoft Azure (App Service, AKS)</strong> and experienced in setting up efficient <strong class="text-indigo-600 dark:text-indigo-400">CI/CD pipelines (Maven, Jenkins)</strong>.
                         </p>
                         <p>
-                            Applying <strong class="text-indigo-600">Agile and DevOps best practices</strong>, I strive to streamline development workflows and enhance collaboration. As a <strong class="text-indigo-600">certified Microsoft Azure Administrator</strong>, I also bring solid experience in Thymeleaf and advanced J2EE design patterns, ensuring the creation of reliable and high-performing solutions.
+                            Applying <strong class="text-indigo-600 dark:text-indigo-400">Agile and DevOps best practices</strong>, I strive to streamline development workflows and enhance collaboration. As a <strong class="text-indigo-600 dark:text-indigo-400">certified Microsoft Azure Administrator</strong>, I also bring solid experience in Thymeleaf and advanced J2EE design patterns, ensuring the creation of reliable and high-performing solutions.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-16 md:py-24 bg-gray-50">
+        <section id="skills" class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 relative pb-4">
+                <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-12 relative pb-4">
                     Professional Skills
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 rounded-full"></span>
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full"></span>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-code text-indigo-500 mr-3"></i> Languages
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                            <i class="fas fa-code text-indigo-500 dark:text-indigo-400 mr-3"></i> Languages
                         </h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Java</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> SQL</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> HTML</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> CSS</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> JavaScript</li>
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Java</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> SQL</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> HTML</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> CSS</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> JavaScript</li>
                         </ul>
                     </div>
 
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-cogs text-indigo-500 mr-3"></i> Frameworks/Libraries
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                            <i class="fas fa-cogs text-indigo-500 dark:text-indigo-400 mr-3"></i> Frameworks/Libraries
                         </h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Spring Boot</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Kafka</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Hibernate</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Thymeleaf</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> JUnit</li>
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Spring Boot</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Kafka</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Hibernate</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Thymeleaf</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> JUnit</li>
                         </ul>
                     </div>
 
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-building text-indigo-500 mr-3"></i> Architecture
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                            <i class="fas fa-building text-indigo-500 dark:text-indigo-400 mr-3"></i> Architecture
                         </h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Microservices</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Multi-threaded Programming</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Secure APIs</li>
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Microservices</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Multi-threaded Programming</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Secure APIs</li>
                         </ul>
                     </div>
 
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-tools text-indigo-500 mr-3"></i> Tools
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                            <i class="fas fa-tools text-indigo-500 dark:text-indigo-400 mr-3"></i> Tools
                         </h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Maven</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Jenkins (CI/CD)</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Git</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Postman</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Jira, Confluence</li>
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Maven</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Jenkins (CI/CD)</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Git</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Postman</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Jira, Confluence</li>
                         </ul>
                     </div>
 
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-cloud text-indigo-500 mr-3"></i> Cloud
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                            <i class="fas fa-cloud text-indigo-500 dark:text-indigo-400 mr-3"></i> Cloud
                         </h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Microsoft Azure (App Service, AKS)</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> AWS (Basic)</li>
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Microsoft Azure (App Service, AKS)</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> AWS (Basic)</li>
                         </ul>
                     </div>
 
-                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-project-diagram text-indigo-500 mr-3"></i> Methodologies
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                            <i class="fas fa-project-diagram text-indigo-500 dark:text-indigo-400 mr-3"></i> Methodologies
                         </h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Agile</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Scrum</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> DevOps</li>
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Agile</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> Scrum</li>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i> DevOps</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-lg font-medium text-gray-800">Java</span>
-                            <span class="text-indigo-600 font-semibold">95%</span>
+                            <span class="text-lg font-medium text-gray-800 dark:text-white">Java</span>
+                            <span class="text-indigo-600 dark:text-indigo-300 font-semibold">95%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 95%;"></div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full" style="width: 95%;"></div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-lg font-medium text-gray-800">Spring Boot</span>
-                            <span class="text-indigo-600 font-semibold">90%</span>
+                            <span class="text-lg font-medium text-gray-800 dark:text-white">Spring Boot</span>
+                            <span class="text-indigo-600 dark:text-indigo-300 font-semibold">90%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 90%;"></div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full" style="width: 90%;"></div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-lg font-medium text-gray-800">Microsoft Azure</span>
-                            <span class="text-indigo-600 font-semibold">85%</span>
+                            <span class="text-lg font-medium text-gray-800 dark:text-white">Microsoft Azure</span>
+                            <span class="text-indigo-600 dark:text-indigo-300 font-semibold">85%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 85%;"></div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full" style="width: 85%;"></div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-lg font-medium text-gray-800">Azure DevOps</span>
-                            <span class="text-indigo-600 font-semibold">65%</span>
+                            <span class="text-lg font-medium text-gray-800 dark:text-white">Azure DevOps</span>
+                            <span class="text-indigo-600 dark:text-indigo-300 font-semibold">65%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 65%;"></div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-indigo-600 dark:bg-indigo-500 h-2.5 rounded-full" style="width: 65%;"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="certifications" class="py-16 md:py-24 bg-white">
+        <section id="certifications" class="py-16 md:py-24 bg-white dark:bg-gray-800">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 relative pb-4">
+                <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-12 relative pb-4">
                     Certifications
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 rounded-full"></span>
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full"></span>
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-indigo-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200">
-                        <div class="text-5xl text-indigo-600 mb-4">
+                    <div class="bg-indigo-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200 dark:border-gray-700">
+                        <div class="text-5xl text-indigo-600 dark:text-indigo-400 mb-4">
                             <i class="fas fa-award"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">AZ-900</h3>
-                        <p class="text-gray-600 mb-3">Microsoft Certified: Azure Fundamentals</p>
-                        <div class="text-yellow-500 text-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">AZ-900</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Microsoft Certified: Azure Fundamentals</p>
+                        <div class="text-yellow-500 dark:text-yellow-400 text-lg">
                             <i class="fas fa-star"></i>
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
                         </div>
                     </div>
 
-                    <div class="bg-indigo-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200">
-                        <div class="text-5xl text-indigo-600 mb-4">
+                    <div class="bg-indigo-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200 dark:border-gray-700">
+                        <div class="text-5xl text-indigo-600 dark:text-indigo-400 mb-4">
                             <i class="fas fa-award"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">AZ-104</h3>
-                        <p class="text-gray-600 mb-3">Microsoft Certified: Azure Administrator Associate</p>
-                        <div class="text-yellow-500 text-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">AZ-104</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Microsoft Certified: Azure Administrator Associate</p>
+                        <div class="text-yellow-500 dark:text-yellow-400 text-lg">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="far fa-star"></i>
                         </div>
                     </div>
 
-                    <div class="bg-indigo-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200">
-                        <div class="text-5xl text-indigo-600 mb-4">
+                    <div class="bg-indigo-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200 dark:border-gray-700">
+                        <div class="text-5xl text-indigo-600 dark:text-indigo-400 mb-4">
                             <i class="fas fa-award"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Java Certified</h3>
-                        <p class="text-gray-600 mb-3">Java SE 8 Programmer</p>
-                        <div class="text-yellow-500 text-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Java Certified</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Oracle Certified Professional, Java SE 8 Programmer</p>
+                        <div class="text-yellow-500 dark:text-yellow-400 text-lg">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
                     </div>
 
-                    <div class="bg-indigo-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200">
-                        <div class="text-5xl text-indigo-600 mb-4">
+                    <div class="bg-indigo-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2 text-center border border-indigo-200 dark:border-gray-700">
+                        <div class="text-5xl text-indigo-600 dark:text-indigo-400 mb-4">
                             <i class="fas fa-award"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Machine Learning</h3>
-                        <p class="text-gray-600 mb-3">IBM Certificate</p>
-                        <div class="text-yellow-500 text-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Machine Learning</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-3">IBM Certificate</p>
+                        <div class="text-yellow-500 dark:text-yellow-400 text-lg">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="far fa-star"></i>
@@ -291,72 +326,85 @@
             </div>
         </section>
 
-        <section id="work" class="py-16 md:py-24 bg-gray-200">
-            <div class="container mx-auto px-4 max-w-6xl"> <h2 class="text-4xl font-bold text-center text-gray-800 mb-12 relative pb-4">
+        <section id="work" class="py-16 md:py-24 bg-gray-200 dark:bg-gray-900">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-12 relative pb-4">
                     My Work
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 rounded-full"></span>
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 dark:bg-indigo-400 rounded-full"></span>
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
                         <a href="https://sequre.app/" target="_blank" class="block">
-                            <img src="work1.jpg" alt="Project 1" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300"> <div class="p-4"> <h3 class="text-xl font-semibold text-gray-800 mb-2">Secure App</h3>
-                                <p class="text-gray-600 text-sm">A secure application demonstrating JWT and OAuth 2.0 integration.</p>
-                                <span class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+                            <img src="assets/img/work1.jpg" alt="Project 1" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Secure App</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">A secure application demonstrating JWT and OAuth 2.0 integration.</p>
+                                <span class="inline-block mt-4 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-medium transition duration-300">
                                     View Project <i class="fas fa-arrow-right ml-1"></i>
                                 </span>
                             </div>
                         </a>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
                         <a href="#" target="_blank" class="block">
-                            <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Project+2" alt="Project 2" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300"> <div class="p-4"> <h3 class="text-xl font-semibold text-gray-800 mb-2">Microservices Platform</h3>
-                                <p class="text-gray-600 text-sm">Developed a scalable microservices architecture with Spring Boot and Kafka.</p>
-                                <span class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+                            <img src="assets/img/work2.jpg" alt="Project 2" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Microservices Platform</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">Developed a scalable microservices architecture with Spring Boot and Kafka.</p>
+                                <span class="inline-block mt-4 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-medium transition duration-300">
                                     View Project <i class="fas fa-arrow-right ml-1"></i>
                                 </span>
                             </div>
                         </a>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
                         <a href="#" target="_blank" class="block">
-                            <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Project+3" alt="Project 3" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300"> <div class="p-4"> <h3 class="text-xl font-semibold text-gray-800 mb-2">Cloud Deployment Automation</h3>
-                                <p class="text-gray-600 text-sm">Implemented CI/CD pipelines for Azure deployments using Jenkins.</p>
-                                <span class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+                            <img src="assets/img/work3.jpg" alt="Project 3" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Cloud Deployment Automation</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">Implemented CI/CD pipelines for Azure deployments using Jenkins.</p>
+                                <span class="inline-block mt-4 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-medium transition duration-300">
                                     View Project <i class="fas fa-arrow-right ml-1"></i>
                                 </span>
                             </div>
                         </a>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
                         <a href="#" target="_blank" class="block">
-                            <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Project+4" alt="Project 4" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300"> <div class="p-4"> <h3 class="text-xl font-semibold text-gray-800 mb-2">Data Management System</h3>
-                                <p class="text-gray-600 text-sm">Designed and developed a robust data management system with SQL.</p>
-                                <span class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+                            <img src="assets/img/work4.jpg" alt="Project 4" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Data Management System</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">Designed and developed a robust data management system with SQL.</p>
+                                <span class="inline-block mt-4 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-medium transition duration-300">
                                     View Project <i class="fas fa-arrow-right ml-1"></i>
                                 </span>
                             </div>
                         </a>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
                         <a href="#" target="_blank" class="block">
-                            <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Project+5" alt="Project 5" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300"> <div class="p-4"> <h3 class="text-xl font-semibold text-gray-800 mb-2">E-commerce Backend</h3>
-                                <p class="text-gray-600 text-sm">Backend development for an e-commerce platform using Spring Boot.</p>
-                                <span class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+                            <img src="assets/img/work5.jpg" alt="Project 5" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">E-commerce Backend</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">Backend development for an e-commerce platform using Spring Boot.</p>
+                                <span class="inline-block mt-4 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-medium transition duration-300">
                                     View Project <i class="fas fa-arrow-right ml-1"></i>
                                 </span>
                             </div>
                         </a>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-700">
                         <a href="#" target="_blank" class="block">
-                            <img src="https://placehold.co/600x400/E0E7FF/4F46E5?text=Project+6" alt="Project 6" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300"> <div class="p-4"> <h3 class="text-xl font-semibold text-gray-800 mb-2">Real-time Dashboard</h3>
-                                <p class="text-gray-600 text-sm">Built a real-time dashboard with data streaming capabilities.</p>
-                                <span class="inline-block mt-4 text-indigo-600 hover:text-indigo-800 font-medium transition duration-300">
+                            <img src="assets/img/work6.jpg" alt="Project 6" class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300">
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Real-time Dashboard</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">Built a real-time dashboard with data streaming capabilities.</p>
+                                <span class="inline-block mt-4 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 font-medium transition duration-300">
                                     View Project <i class="fas fa-arrow-right ml-1"></i>
                                 </span>
                             </div>
@@ -366,61 +414,128 @@
             </div>
         </section>
 
-        <section id="contact" class="py-16 md:py-24 bg-gray-900 text-white">
+        <section id="testimonials" class="py-16 md:py-24 bg-gray-900 dark:bg-gray-950 text-white">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <h2 class="text-4xl font-bold text-center text-white mb-8 relative pb-4">
+                    Testimonials
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 rounded-full"></span>
+                </h2>
+                <p class="text-lg text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+                    Hear what others have to say about my work and dedication to building robust and efficient software solutions.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-between">
+                        <div>
+                            <i class="fas fa-quote-left text-4xl text-indigo-400 mb-4"></i>
+                            <p class="text-gray-200 text-lg mb-6">
+                                "Sandeep's expertise in Spring Boot and microservices was instrumental in optimizing our loan process. His solutions improved efficiency by 30%!"
+                            </p>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/4A5568/CBD5E1?text=Client1" alt="Client 1" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-indigo-400">
+                            <p class="font-semibold text-white">Priya Sharma, Project Lead</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-between">
+                        <div>
+                            <i class="fas fa-quote-left text-4xl text-indigo-400 mb-4"></i>
+                            <p class="text-gray-200 text-lg mb-6">
+                                "His implementation of JWT-based security and Redis caching significantly enhanced our application's performance and protection. A true asset!"
+                            </p>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/4A5568/CBD5E1?text=Client2" alt="Client 2" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-indigo-400">
+                            <p class="font-semibold text-white">Rahul Verma, Tech Architect</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-between">
+                        <div>
+                            <i class="fas fa-quote-left text-4xl text-indigo-400 mb-4"></i>
+                            <p class="text-gray-200 text-lg mb-6">
+                                "Sandeep's mentorship was invaluable. He guided our interns through Spring Boot best practices, boosting their productivity and code quality."
+                            </p>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/4A5568/CBD5E1?text=Client3" alt="Client 3" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-indigo-400">
+                            <p class="font-semibold text-white">Anjali Singh, Senior Developer</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-between">
+                        <div>
+                            <i class="fas fa-quote-left text-4xl text-indigo-400 mb-4"></i>
+                            <p class="text-gray-200 text-lg mb-6">
+                                "His ability to deploy scalable cloud infrastructure on Azure, using Kubernetes and Docker, ensured seamless application performance under heavy load."
+                            </p>
+                        </div>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/4A5568/CBD5E1?text=Client4" alt="Client 4" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-indigo-400">
+                            <p class="font-semibold text-white">Vikram Rao, DevOps Engineer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="py-16 md:py-24 bg-gray-900 dark:bg-gray-950 text-white">
             <div class="container mx-auto px-4">
                 <h2 class="text-4xl font-bold text-center text-white mb-12 relative pb-4">
                     Contact Me
                     <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-indigo-500 rounded-full"></span>
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
+                    <div class="bg-gray-800 dark:bg-gray-700 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
                         <div>
-                            <div class="text-indigo-400 text-3xl mb-3">
+                            <div class="text-indigo-400 dark:text-indigo-300 text-3xl mb-3">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <h3 class="text-xl font-semibold text-white mb-1">Email</h3>
-                            <p class="text-gray-300">sandeep30082@gmail.com</p>
+                            <p class="text-gray-300 dark:text-gray-200">sandeep30082@gmail.com</p>
                         </div>
-                        <a href="mailto:sandeep30082@gmail.com" class="text-indigo-400 hover:text-indigo-200 font-medium transition duration-300 mt-4">
+                        <a href="mailto:sandeep30082@gmail.com" class="text-indigo-400 dark:text-indigo-300 hover:text-indigo-200 font-medium transition duration-300 mt-4">
                             Send an Email
                         </a>
                     </div>
 
-                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
+                    <div class="bg-gray-800 dark:bg-gray-700 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
                         <div>
-                            <div class="text-indigo-400 text-3xl mb-3">
+                            <div class="text-indigo-400 dark:text-indigo-300 text-3xl mb-3">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             <h3 class="text-xl font-semibold text-white mb-1">WhatsApp</h3>
-                            <p class="text-gray-300">+91 8107058611</p>
+                            <p class="text-gray-300 dark:text-gray-200">+91 8107058611</p>
                         </div>
-                        <a href="https://wa.me/918107058611" target="_blank" class="text-indigo-400 hover:text-indigo-200 font-medium transition duration-300 mt-4">
+                        <a href="https://wa.me/918107058611" target="_blank" class="text-indigo-400 dark:text-indigo-300 hover:text-indigo-200 font-medium transition duration-300 mt-4">
                             Message Me
                         </a>
                     </div>
 
-                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
+                    <div class="bg-gray-800 dark:bg-gray-700 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
                         <div>
-                            <div class="text-indigo-400 text-3xl mb-3">
+                            <div class="text-indigo-400 dark:text-indigo-300 text-3xl mb-3">
                                 <i class="fab fa-linkedin"></i>
                             </div>
                             <h3 class="text-xl font-semibold text-white mb-1">LinkedIn</h3>
-                            <p class="text-gray-300">Sandeep Kumar</p>
+                            <p class="text-gray-300 dark:text-gray-200">Sandeep Kumar</p>
                         </div>
-                        <a href="https://www.linkedin.com/in/sandeep-kumar-278b041b4/" target="_blank" class="text-indigo-400 hover:text-indigo-200 font-medium transition duration-300 mt-4">
+                        <a href="https://www.linkedin.com/in/sandeep-kumar-278b041b4/" target="_blank" class="text-indigo-400 dark:text-indigo-300 hover:text-indigo-200 font-medium transition duration-300 mt-4">
                             Connect on LinkedIn
                         </a>
                     </div>
 
-                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
+                    <div class="bg-gray-800 dark:bg-gray-700 p-6 rounded-xl shadow-lg flex flex-col items-start justify-between">
                         <div>
-                            <div class="text-indigo-400 text-3xl mb-3">
+                            <div class="text-indigo-400 dark:text-indigo-300 text-3xl mb-3">
                                 <i class="fab fa-github"></i>
                             </div>
                             <h3 class="text-xl font-semibold text-white mb-1">GitHub</h3>
-                            <p class="text-gray-300">sandeepk001</p>
+                            <p class="text-gray-300 dark:text-gray-200">sandeepk001</p>
                         </div>
-                        <a href="https://github.com/sandeepk001" target="_blank" class="text-indigo-400 hover:text-indigo-200 font-medium transition duration-300 mt-4">
+                        <a href="https://github.com/sandeepk001" target="_blank" class="text-indigo-400 dark:text-indigo-300 hover:text-indigo-200 font-medium transition duration-300 mt-4">
                             View GitHub
                         </a>
                     </div>
@@ -430,20 +545,20 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-white py-8 text-center">
-        <div class="container mx-auto px-4">
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white">
+        <div class="container mx-auto px-4 py-8 text-center">
             <p>&copy; 2025 Sandeep Kumar. All rights reserved.</p>
             <div class="flex justify-center space-x-6 mt-4">
-                <a href="https://www.linkedin.com/in/sandeep-kumar-278b041b4/" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="https://www.linkedin.com/in/sandeep-kumar-278b041b4/" target="_blank" class="text-gray-400 dark:text-gray-500 hover:text-white transition duration-300">
                     <i class="fab fa-linkedin-in text-xl"></i>
                 </a>
-                <a href="https://github.com/sandeepk001" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="https://github.com/sandeepk001" target="_blank" class="text-gray-400 dark:text-gray-500 hover:text-white transition duration-300">
                     <i class="fab fa-github text-xl"></i>
                 </a>
-                <a href="mailto:sandeep30082@gmail.com" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="mailto:sandeep30082@gmail.com" class="text-gray-400 dark:text-gray-500 hover:text-white transition duration-300">
                     <i class="fas fa-envelope text-xl"></i>
                 </a>
-                <a href="https://wa.me/918107058611" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="https://wa.me/918107058611" target="_blank" class="text-gray-400 dark:text-gray-500 hover:text-white transition duration-300">
                     <i class="fab fa-whatsapp text-xl"></i>
                 </a>
             </div>
@@ -451,6 +566,61 @@
     </footer>
 
     <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
+        const htmlElement = document.documentElement; // Get the html element
+
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeIconMobile.classList.remove('fa-moon');
+                themeIconMobile.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                themeIconMobile.classList.remove('fa-sun');
+                themeIconMobile.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Default to dark mode if user's system prefers it and no theme is saved
+            setTheme('dark');
+        } else {
+            // Default to light mode
+            setTheme('light');
+        }
+
+        // Event listener for desktop theme toggle
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Event listener for mobile theme toggle
+        themeToggleMobile.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
